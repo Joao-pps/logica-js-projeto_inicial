@@ -1,44 +1,31 @@
-let mensagem = document.querySelector(".container__texto-azul"); // Vai pegar o elemento <span> do HTML
-const limite = 10; // Número limite para escolhas
-let tentativas = 0;
-let limiteTentativas = 3;
+alert('Boas vindas ao jogo do número secreto');
+let numeroSecreto = parseInt(Math.random() * 100 + 1);
+console.log(numeroSecreto);
+let chute;
+let tentativas = 1;
 
-function geradorNumeroAleatorio() { // Função responsável por gerar número aleatório
-    return parseInt(Math.random() * limite); // Retornando o número aleatório
-}
-
-let numeroSecreto = geradorNumeroAleatorio(); // Salvando o retorno da função em uma variável
-console.log(numeroSecreto); // Imprime o valor do meu número aleatório
-
-
-// Condição que vai analisar se meu número escolhido é menor ou igual ao limite estipulado
-// e se o tipo de dados das duas variáveis é similar.
-while (limiteTentativas != tentativas) {
-    let numeroEscolhido = parseInt(window.prompt(`Digite um número de 0 a 10, você tem ${limiteTentativas - tentativas} tentativas`)); // Vai pegar o número do usuário
-    if (numeroEscolhido <= limite && typeof numeroEscolhido === typeof numeroSecreto) {
-
-        // Condição que vai analisar se o número que o usuário escolheu é igual ao número secreto
-        if (numeroEscolhido === numeroSecreto) {
-            // A resposta, caso for verdadeira, será a adição do texto "Acertou!" na minha tag <span>.
-            alert("Isso ai, você acertou!");
-            mensagem.textContent = "Acertou!";
-            break;
-        } else {
-            if (numeroEscolhido > numeroSecreto) {
-                alert(`O numero secreto e menor que ${numeroEscolhido}`);
-            } else {
-                alert(`O numero secreto e maior que ${numeroEscolhido}`);
-            }
-            // A resposta, caso for falsa, será a adição do texto "Errou!" na minha tag <span>.
-        }
+// enquanto chute não for igual ao n.s.
+while (chute != numeroSecreto) {
+    chute = prompt('Escolha um número entre 1 e 100');
+    // se chute for igual ao número secreto
+    if (chute == numeroSecreto) {
+        break;
     } else {
-        // Retorna caso o número que o usuário escolheu seja maior que o limite ou que seja de outro tipo de dado.
-        alert("Coloque apenas números e não exceda o limite");
+        if (chute > numeroSecreto) {
+            alert(`O número secreto é menor que ${chute}`);
+        } else {
+            alert(`O número secreto é maior que ${chute}`);
+        }
+        // tentativas = tentativas + 1;
+        tentativas++;
     }
-    ++tentativas
 }
-console.log(limiteTentativas, tentativas)
-if(limiteTentativas === tentativas) {
-    alert("Suas tentativas acabaram")
-    mensagem.textContent = "Acabou as tentativas!";
-}
+
+let palavraTentativa = tentativas > 1 ? 'tentativas' : 'tentativa';
+alert(`Isso ai! Você descobriu o número secreto ${numeroSecreto} com ${tentativas} ${palavraTentativa}.`);
+
+// if (tentativas > 1) {
+//     alert(`Isso ai! Você descobriu o número secreto ${numeroSecreto} com ${tentativas} tentativas.`);
+// } else {
+//     alert(`Isso ai! Você descobriu o número secreto ${numeroSecreto} com ${tentativas} tentativa.`);
+// }
